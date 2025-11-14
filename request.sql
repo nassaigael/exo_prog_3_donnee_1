@@ -101,3 +101,13 @@ from
     Employee e
     inner join Leave l on e.id = l.id_employee
     inner join Team t on t.id = e.id_team;
+
+-- 4: Affichez par le nombre d’employés par contract_type, vous devez afficher le type de
+-- contrat, et le nombre d’employés associés.
+select
+    e.contract_type,
+    count(*) as employee_total
+from
+    Employee e
+group by
+    contract_type;
