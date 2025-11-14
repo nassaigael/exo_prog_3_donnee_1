@@ -87,3 +87,17 @@ where
         where
             l.id_employee = e.id
     );
+
+-- 3: Afficher les congés de tel sorte qu’on voie l’id du congé, le début du congé, la fin du
+-- congé, le nom & prénom de l’employé qui prend congé et le nom de son équipe.
+select
+    l.id,
+    l.start_date,
+    l.end_date,
+    e.first_name,
+    e.last_name,
+    t.name
+from
+    Employee e
+    inner join Leave l on e.id = l.id_employee
+    inner join Team t on t.id = e.id_team;
