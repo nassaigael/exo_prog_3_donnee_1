@@ -70,8 +70,8 @@ from
 where
     id_team = null;
 
--- 2: Afficher l’id, first_name, last_name des employés qui n’ont jamais pris de congé de 
--- leur vie.
+-- 2: Afficher l’id, first_name, last_name des employés qui n’ont jamais pris 
+-- de congé de leur vie.
 select
     e.id,
     e.first_name,
@@ -102,8 +102,8 @@ from
     inner join Leave l on e.id = l.id_employee
     inner join Team t on t.id = e.id_team;
 
--- 4: Affichez par le nombre d’employés par contract_type, vous devez afficher le type de
--- contrat, et le nombre d’employés associés.
+-- 4: Affichez par le nombre d’employés par contract_type, vous devez afficher 
+-- le type de contrat, et le nombre d’employés associés.
 select
     e.contract_type,
     count(*) as employee_total
@@ -111,3 +111,13 @@ from
     Employee e
 group by
     contract_type;
+
+-- 5: Afficher le nombre d’employés en congé aujourd'hui. La période de congé 
+-- s'étend de start_date inclus jusqu’à end_date inclus.
+select
+    count(*) as employee_total
+from
+    Leave l
+where
+    CURRENT_DATE between start_date
+    and end_date;
