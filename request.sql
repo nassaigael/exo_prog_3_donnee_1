@@ -40,3 +40,5 @@ values
     (default, '2025-04-02', '2025-06-30', 3);
 
 
+-- 1: Afficher l’id, first_name, last_name des employés qui n’ont pas d’équipe.
+select (id, first_name, last_name) from Employee where id_team=null;
