@@ -62,8 +62,28 @@ values
 
 -- 1: Afficher l’id, first_name, last_name des employés qui n’ont pas d’équipe.
 select
-    (id, first_name, last_name)
+    id,
+    first_name,
+    last_name
 from
     Employee
 where
     id_team = null;
+
+-- 2: Afficher l’id, first_name, last_name des employés qui n’ont jamais pris de congé de 
+-- leur vie.
+select
+    e.id,
+    e.first_name,
+    e.last_name
+from
+    Employee e
+where
+    not exists(
+        select
+            *
+        from
+            Leave l
+        where
+            l.id_employee = e.id
+    );
