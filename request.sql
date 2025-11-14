@@ -115,9 +115,30 @@ group by
 -- 5: Afficher le nombre d’employés en congé aujourd'hui. La période de congé 
 -- s'étend de start_date inclus jusqu’à end_date inclus.
 select
-    count(*) as employee_total
+    count(distinct l.id_employee) as employee_total
 from
     Leave l
 where
     CURRENT_DATE between start_date
     and end_date;
+
+-- 6: Afficher l’id, le nom, le prénom de tous les employés + le nom de leur équipe
+-- qui sont en congé aujourd’hui. Pour rappel, la end_date est incluse dans le congé,
+-- l’employé ne revient que le lendemain.
+select
+    e.id,
+    e.first_name,
+    e.last_name,
+    t.name
+from
+    Employee e
+    inner join Leave l on e.id = l.id_employee
+    inner join Team t on t.id = e.id_team
+where
+    CURRENT_DATE between start_date
+    and end_date
+group by
+    e.id,
+    e.first_name,
+    e.last_name,
+    t.name;
