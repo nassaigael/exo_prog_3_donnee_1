@@ -9,14 +9,14 @@ create table Employee(
     last_name varchar(100) not null,
     contract_type varchar(50) not null,
     salary int not null,
-    id_team int references Team(id)
+    id_team int not null references Team(id)
 );
 
 create table Leave(
     id serial primary key,
     "start_date" date not null,
     end_date date not null,
-    id_employee int references Employee(id)
+    id_employee int not null references Employee(id)
 );
 
 insert into
@@ -54,6 +54,7 @@ values
         3
     );
 
+
 insert into
     Leave
 values
@@ -67,7 +68,7 @@ select
 from
     Employee
 where
-    id_team = null;
+    id_team is null;
 
 
 select
@@ -79,7 +80,10 @@ from
 where
     not exists(
         select
-            *
+            l.id,
+            l.start_date,
+            l.end_date,
+            l.id_employee
         from
             Leave l
         where
@@ -102,7 +106,7 @@ from
 
 select
     e.contract_type,
-    count(*) as employee_total
+    count(contract_type) as employee_total
 from
     Employee e
 group by
