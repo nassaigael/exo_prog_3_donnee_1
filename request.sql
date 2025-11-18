@@ -60,7 +60,6 @@ values
     (default, '2025-01-31', '2025-05-31', 2),
     (default, '2025-04-02', '2025-06-30', 3);
 
--- 1: Afficher l’id, first_name, last_name des employés qui n’ont pas d’équipe.
 select
     id,
     first_name,
@@ -70,8 +69,7 @@ from
 where
     id_team = null;
 
--- 2: Afficher l’id, first_name, last_name des employés qui n’ont jamais pris 
--- de congé de leur vie.
+
 select
     e.id,
     e.first_name,
@@ -88,8 +86,7 @@ where
             l.id_employee = e.id
     );
 
--- 3: Afficher les congés de tel sorte qu’on voie l’id du congé, le début du congé, la fin du
--- congé, le nom & prénom de l’employé qui prend congé et le nom de son équipe.
+
 select
     l.id,
     l.start_date,
@@ -102,8 +99,7 @@ from
     inner join Leave l on e.id = l.id_employee
     inner join Team t on t.id = e.id_team;
 
--- 4: Affichez par le nombre d’employés par contract_type, vous devez afficher 
--- le type de contrat, et le nombre d’employés associés.
+
 select
     e.contract_type,
     count(*) as employee_total
@@ -112,8 +108,7 @@ from
 group by
     contract_type;
 
--- 5: Afficher le nombre d’employés en congé aujourd'hui. La période de congé 
--- s'étend de start_date inclus jusqu’à end_date inclus.
+
 select
     count(distinct l.id_employee) as employee_total
 from
@@ -122,9 +117,7 @@ where
     CURRENT_DATE between start_date
     and end_date;
 
--- 6: Afficher l’id, le nom, le prénom de tous les employés + le nom de leur équipe
--- qui sont en congé aujourd’hui. Pour rappel, la end_date est incluse dans le congé,
--- l’employé ne revient que le lendemain.
+
 select
     e.id,
     e.first_name,
